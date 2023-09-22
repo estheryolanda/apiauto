@@ -6,7 +6,7 @@ class TestProjects:
     def setup_class(self):
         print("Setup class")
         # arrange of test
-        self.token = "9463fd6e63c3ac3e06372045795ef48264968d2c"
+        self.token = "98c44b35dde00a5f2df4ce7a675cc6e2d964f6a0"
         self.headers = {
             "Authorization": "Bearer {}".format(self.token)
         }
