@@ -70,4 +70,5 @@ class TestProjects:
 
     @classmethod
     def teardown_class(cls):
-         print("teardown")
+        print("teardown")
+
