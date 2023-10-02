@@ -1,0 +1,21 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/sections",
+    "body": {
+      "name": "Section Y"
+    }
+  },
+  "response": {
+    "body": {
+        "id": "7025",
+        "project_id": "2203306141",
+        "order": 1,
+        "name": "Groceries"
+    },
+    "headers": {
+      "Content-type": "application/json"
+    },
+    "status": 200
+  }
+}
