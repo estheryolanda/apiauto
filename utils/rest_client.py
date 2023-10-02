@@ -41,8 +41,8 @@ class RestClient(metaclass=Singleton):
             if hasattr(response, "request"):
                 LOGGER.debug("Request: %s", response.request.headers)
             if response.text:
-                LOGGER.info("Response: %s", response.text)
-                response_dict["body"] = json.loads(response.text)
+                LOGGER.info("Response: %s", response.content)
+                response_dict["body"] = json.loads(response.content)
             else:
                 response_dict["body"] = {"msg": "No body content"}
 
@@ -58,7 +58,8 @@ class RestClient(metaclass=Singleton):
 
     def get(self, session, url_base, headers):
         """
-
+        Method get
+        :param session:
         :param url_base:
         :param headers:
         :return:
@@ -67,16 +68,18 @@ class RestClient(metaclass=Singleton):
 
     def post(self, session, url_base, headers, data):
         """
-
+        Method post
+        :param session:
         :param url_base:
         :param headers:
+        :param data:
         :return:
         """
         return self.send_request("post", session, url_base, headers, data=data)
 
     def delete(self, session, url_base, headers):
         """
-
+        Method delete
         :param url_base:
         :param headers:
         :return:

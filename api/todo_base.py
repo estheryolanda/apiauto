@@ -20,7 +20,7 @@ class TodoBase(metaclass=Singleton):
         """
         response = RestClient().send_request("get", session=self.session,
                                              url=self.url_projects, headers=HEADERS)
-        if len(response.json()) == 0:
+        if len(response) == 0:
             raise AssertionError("No projects available")
 
         return response
@@ -75,11 +75,46 @@ class TodoBase(metaclass=Singleton):
         return section_id_list
 
     def get_all_tasks(self):
+        """
+        Get all tasks.
+        :return:
+        """
         response = RestClient().send_request("get", session=self.session,
                                              url=self.url_tasks, headers=HEADERS)
-        if len(response.json()) == 0:
+        if len(response["body"]) == 0:
             raise AssertionError("No tasks available")
 
         return response
 
+    def delete_tasks(self, tasks_list):
+        """
+        Delete the tasks listed
+        :param tasks_list: tasks id list
+        :return:
+        """
+        for task in tasks_list:
+            url = f"{self.url_tasks}/{task}"
+            RestClient().send_request(method_name="delete", session=self.session, url=url, headers=HEADERS)
 
+    def create_task(self, project_id=None, section_id=None):
+        """
+        Method to create a task
+        :param project_id:
+        :param section_id:
+        :return:
+        """
+        data = {
+            "content": "Task inside section",
+            "due_string": "tomorrow at 12:00",
+            "due_lang": "en",
+            "priority": 4
+        }
+        if project_id:
+            data["project_id"] = project_id
+        if section_id:
+            data["section_id"] = section_id
+
+        response = RestClient().send_request("post", session=self.session, headers=HEADERS,
+                                             url=self.url_tasks, data=data)
+
+        return response
